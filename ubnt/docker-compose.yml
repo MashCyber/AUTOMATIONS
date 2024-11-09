@@ -1,11 +1,12 @@
-version: "3.8"
-
 services:
   ubuntu_test:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: tjmash/ubnt:jammy
     container_name: ubnt
+    ports:
+      - 2222:22
     tty: true
     volumes:
       - ./data:/app/data
