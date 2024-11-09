@@ -1,0 +1,39 @@
+services:
+  svr1-ubnt:
+    image: tjmash/ubnt:jammy
+    container_name: svr1
+    ports:
+      - 2021:22
+    tty: true
+    volumes:
+      - ./data1:/app/data
+    networks:
+      - ubnt-net
+  svr2-ubnt:
+    image: tjmash/ubnt:jammy
+    container_name: svr2
+    ports:
+      - 2022:22
+    tty: true
+    volumes:
+      - ./data2:/app/data
+    depends_on:
+      - svr1-ubnt
+    networks:
+      - ubnt-net
+  svr3-ubnt:
+    image: tjmash/ubnt:jammy
+    container_name: svr3
+    ports:
+      - 2023:22
+    tty: true
+    volumes:
+      - ./data3:/app/data
+    depends_on:
+      - svr2-ubnt
+    networks:
+      - ubnt-net
+
+networks:
+  ubnt-net:
+    driver: bridge

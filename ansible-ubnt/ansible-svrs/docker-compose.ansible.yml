@@ -1,0 +1,15 @@
+services:
+  ansible-host:
+    image: tjmash/ubnt:jammy
+    container_name: ansible-host
+    ports:
+      - 2222:22
+    tty: true
+    volumes:
+      - ./ansible-keys:/app/data/ansible-keys
+    networks:
+      - ubnt-net
+
+networks:
+  ubnt-net:
+    driver: bridge

@@ -2,7 +2,7 @@ FROM ubuntu:jammy
 
 # Update and install necessary packages
 RUN apt-get update && \
-    apt-get install -y curl vim openssh-server net-tools && \
+    apt-get install -y curl vim openssh-server net-tools iproute2 iputils-ping && \
     apt-get clean
 
 # Create a directory for SSH daemon process
