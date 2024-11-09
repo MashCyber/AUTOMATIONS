@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  ubuntu_test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ubnt
+    tty: true
+    volumes:
+      - ./data:/app/data
+    networks:
+      - ubnt-net
+
+networks:
+  ubnt-net:
+    driver: bridge
