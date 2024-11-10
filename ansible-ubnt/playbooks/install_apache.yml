@@ -7,6 +7,7 @@
   - name: update repository index
     apt:
       update_cache: true
+    when: ansible_distribution == "Ubuntu"
 
   - name: install apache2 && net-tools packages
     apt: 
@@ -14,9 +15,11 @@
         - apache2
         - net-tools
       state: "latest"
+    when: ansible_distribution == "Ubuntu"
   
   - name: add php support for apache2
     apt:
       name:
         - libapache2-mod-php
       state: "latest"
+    when: ansible_distribution == "Ubuntu"
