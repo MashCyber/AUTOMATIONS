@@ -5,12 +5,6 @@
   tasks:
 
   ## Ubuntu
-
-  - name: Ubuntu, update repository index
-    apt:
-      update_cache: true
-    when: ansible_distribution == "Ubuntu"
-
   - name: Ubuntu, install apache2 && net-tools && PHP support packages
     apt: 
       name:
@@ -18,19 +12,15 @@
         - libapache2-mod-php
         - net-tools
       state: "latest"
+      update_cache: true
     when: ansible_distribution == "Ubuntu"
 
   ## Centos  
-
-  - name: Centos, update repository index
-    apt:
-      update_cache: true
-    when: ansible_distribution == "Centos"
-
   - name: Centos, install httpd and PHP packages  
     dnf: 
       name: 
       - httpd
       - php
       state: "latest"
+      update_cache: true
     when: ansible_distribution == "Centos"
