@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  tasks:
+
+  - name: Hello, anyone home??
+    ansible.builtin.ping:
+      data: ping
+  

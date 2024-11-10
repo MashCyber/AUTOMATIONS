@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Upgrade all dist-outdated packages
+    apt:
+      upgrade: dist
