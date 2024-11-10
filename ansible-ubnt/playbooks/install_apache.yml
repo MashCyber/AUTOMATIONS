@@ -4,13 +4,12 @@
   become: true
   tasks:
 
-  ## Ubuntu
-  - name: Ubuntu, install apache2 && net-tools && PHP support packages
+  ## Ubuntu && Centos
+  - name: install apache2 && PHP 
     apt: 
       name:
         - apache2
         - libapache2-mod-php
-        - net-tools
       state: "latest"
       update_cache: true
     when: ansible_distribution == "Ubuntu"
