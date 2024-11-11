@@ -5,5 +5,5 @@
   tasks:
 
   - name: Upgrade all dist-outdated packages
-    apt:
+    package:
       upgrade: dist
