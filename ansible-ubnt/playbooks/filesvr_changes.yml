@@ -1,0 +1,21 @@
+---
+
+- hosts: file_servers
+  become: true
+  tasks:
+
+  - name: change filesvr hostname to buckets
+    tags: smb,samba
+    ansible.builtin.lineinfile:
+      path: /etc/hostname
+      regexp: "^961c5d2e83f6"
+      line: buckets
+    when: ansible_distribution == "Ubuntu"
+    register: hostname
+  
+  - name: restart hostname
+    tags: samba,smb
+    ansible.builtin.service:
+      name: hostname
+      state: restarted
+    when: buckets.change

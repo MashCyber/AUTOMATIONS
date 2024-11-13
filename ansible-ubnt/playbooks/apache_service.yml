@@ -1,0 +1,12 @@
+---
+
+- hosts: web_servers
+  become: true
+  tasks:
+  
+  - name: Disable apache2
+    tags: apache2,website
+    ansible.builtin.service:
+      name: apache2
+      state: started
+      enabled: true
