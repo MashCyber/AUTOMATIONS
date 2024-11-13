@@ -6,7 +6,7 @@
   pre_tasks:
   
   - name: install updates (Ubuntu)
-    tags: always
+    tags:  notalways #Always tag ensures play runs all the time irregardless 
     apt:
       upgrade: dist
       update_cache: true
@@ -38,6 +38,15 @@
       state: latest
       update_cache: true
     when: ansible_distribution == "Ubuntu"
+  
+  - name: copy html file into the server
+    tags: website,apache,httpd
+    ansible.builtin.copy:
+      src: /app/data/ansible-keys/ans/playbooks/files/defaults_sites.html
+      dest: /var/www/html/index.html
+      owner: root
+      group: root
+      mode: 0644
 
 # Only db servers
 - hosts: db_servers
@@ -81,3 +90,16 @@
         state: latest
 
       when: ansible_distribution == "Ubuntu"
+
+- hosts: file_servers
+  become: true
+  tasks:
+
+  - name: add bravest file to /opt to file_servers
+    tags: brave
+    ansible.builtin.copy:
+      src: ./files/brave.txt
+      dest: /opt/bravessss.txt
+      mode: 0600
+      owner: root
+      group: root
