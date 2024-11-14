@@ -1,0 +1,51 @@
+---
+
+# BOOTSRAPS
+# run kernel upgrade
+- hosts: all
+  become: true
+  pre_tasks:
+  
+  - name: Index update
+    tags: always
+    ansible.builtin.apt:
+      update_cache: true
+      only_upgrade: true
+    when: ansible_distribution == "Ubuntu"
+  
+  - name: Install updates(ubuntu)
+    tags: debian, ubuntu
+    ansible.builtin.apt:
+      upgrade: dist
+      update_cache: true
+    when: ansible_distribution =="Ubuntu"
+
+
+## Add the simone user and push ssh key
+
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: create simone user
+    tags: newuser
+    ansible.builtin.user:
+      name: simone
+      group: root
+  
+  - name: add ssh key to user
+    tags: keys,ubuntu
+    ansible.posix.authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICG424K+Gcms991PwtMCw/A/59/hyC4GvJgba9zcy4gF ansible"
+      # state: absent --> remove the key inline
+  
+  - name: add simone sudoer
+    tags: sudoer
+    ansible.builtin.copy:
+      src: ./files/sudoer_simone
+      dest: /etc/sudoers.d/simone
+      owner: root
+      group: root
+      mode: 0440
+    

@@ -1,0 +1,30 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: create simone's user
+    tags: always
+    ansible.builtin.user:
+      name: simone
+      group: root
+    # register: simone
+  
+  - name: add an ssh key
+    tags: always
+    ansible.posix.authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICG424K+Gcms991PwtMCw/A/59/hyC4GvJgba9zcy4gF ansible"
+    # when: simone.changed
+  
+  - name: add sudoer for simone
+    tags: sudoer
+    ansible.builtin.copy:
+      src: ./files/sudoer_simone
+      dest: /etc/sudoers.d/simone
+      owner: root
+      group: root
+      mode: 0440
+      
+    
