@@ -25,7 +25,9 @@ ExecStart=/usr/local/bin/node_exporter
 WantedBy=default.target
 EOF
 
+## Add user
 sudo useradd -rs /bin/false node_exporter
+
 sudo systemctl daemon-reload && \
 sudo systemctl enable node_exporter && \
 sudo systemctl start node_exporter && \
