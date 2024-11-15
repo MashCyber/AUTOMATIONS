@@ -5,8 +5,8 @@
 
 #!/bin/bash
 
-wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
-tar -xvzf node_exporter-1.8.2.linux-amd64.tar.gz
+sudo wget https://github.com/prometheus/node_exporter/releases/download/v1.8.2/node_exporter-1.8.2.linux-amd64.tar.gz
+sudo tar -xvzf node_exporter-1.8.2.linux-amd64.tar.gz
 sudo mv node_exporter-1.8.2.linux-amd64/node_exporter /usr/local/bin/
 
 #sudo touch /etc/systemd/system/node_exporter.service
