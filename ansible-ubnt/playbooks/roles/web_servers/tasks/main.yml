@@ -1,0 +1,16 @@
+- name: install nginx (Web servers)
+  tags: nginx
+  apt:
+    name: nginx
+    state: latest
+    update_cache: true
+  when: ansible_distribution == "Ubuntu"
+
+- name: copy html file into the server
+  tags: website,apache,httpd
+  ansible.builtin.copy:
+    src: /app/data/ansible-keys/ans/playbooks/files/defaults_sites.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: 0644

@@ -1,0 +1,13 @@
+- name: Install Unzip
+  ansible.builtin.package:
+    name: unzip
+    state: latest
+
+- name: Install terraform
+  ansible.builtin.unarchive:
+    src: https://releases.hashicorp.com/terraform/1.9.8/terraform_1.9.8_linux_386.zip
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
