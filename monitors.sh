@@ -6,7 +6,9 @@
 #!/bin/bash
 
 echo """
+==============================================================================
 [*] Install node exporter as a daemon systemd && cAdvisor for docker monitoring!
+==============================================================================
 [*] Starting..
 """
 echo"""
@@ -26,20 +28,6 @@ sudo useradd --no-create-home --shell /bin/false node_exporter
 sudo chown node_exporter:node_exporter /usr/local/bin/node_exporter
 
 # Create nodeexporter daemon
-# sudo cat <<EOF > /etc/systemd/system/node_exporter.service
-# [Unit]
-# Description=Prometheus Node Exporter
-# After=network.target
-
-# [Service]
-# User=node_exporter
-# Group=node_exporter
-# ExecStart=/usr/local/bin/node_exporter
-
-# [Install]
-# WantedBy=default.target
-# EOF
-
 echo "[Unit]
 Description=Prometheus Node Exporter
 After=network.target
@@ -62,7 +50,14 @@ sudo systemctl status node_exporter
 curl http://localhost:9100/metrics
 
 echo """
+cAdvisor running on: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1):8181
+"""
+
+echo """
+=======================================
 [+] Nodeexporter installation complete!
+
+=======================================
 """
 
 echo"""
@@ -92,5 +87,16 @@ networks:
 " | sudo tee /usr/local/lib/docker-compose.cadvisor.yml > /dev/null
 
 # Bring up the service
-sudo docker compose -f /usr/local/lib/docker-compose.cadvisor.yml up -d
+sudo docker compose -f /usr/local/lib/docker-compose.cadvisor.yml up -d && \
+sleep 30s && \
+
 sudo docker ps
+echo '''
+[+] cAdvisor installation complete!
+'''
+echo """
+Nodeexporter is running on: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1):9100
+cAdvisor is running on: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1):8181
+
+Note: Add both to prometheus.yml and restart service
+"""
