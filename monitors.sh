@@ -56,18 +56,18 @@ cAdvisor running on: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut
 echo """
 =======================================
 [+] Nodeexporter installation complete!
-
 =======================================
 """
 
 echo"""
-[*] cAdvisor installing..
+[*] cAdvisor installing...
 """
 
-# Check docker availability
+echo"""
+[*]  Check docker availability...
+"""
 docker version
 
-#Create network for
 # Download cAdvisor compose yml 
 echo "
 services:
@@ -91,9 +91,7 @@ sudo docker compose -f /usr/local/lib/docker-compose.cadvisor.yml up -d && \
 sleep 30s && \
 
 sudo docker ps
-echo '''
-[+] cAdvisor installation complete!
-'''
+echo '[+] cAdvisor installation complete!'
 echo """
 Nodeexporter is running on: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1):9100
 cAdvisor is running on: $(ip addr show eth0 | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1):8181
