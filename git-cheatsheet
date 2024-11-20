@@ -1,0 +1,33 @@
+# 1. Create a new branch
+git branch <new-branch-name>
+
+# 2. Switch to the new branch
+git checkout <new-branch-name>  # or use `git switch <new-branch-name>`
+
+# 3. Make your changes in the new branch
+# (edit files as needed)
+
+# 4. Stage your changes
+git add <file1> <file2>  # or use `git add .` to stage all changes
+
+# 5. Commit your changes
+git commit -m "Your commit message here"
+
+# 6. Switch back to the main branch
+git checkout main  # or use `git switch main`
+
+# 7. Pull the latest changes from main (optional but recommended)
+git pull origin main
+
+# 8. Merge the new branch into main
+git merge <new-branch-name>
+
+# 9. Resolve merge conflicts if any
+# (Manually resolve conflicts, then commit the resolved files)
+
+# 10. Push the merged changes to the remote repository
+git push origin main
+
+# 11. (Optional) Delete the branch after merging
+git branch -d <new-branch-name>  # Deletes the branch locally
+git push origin --delete <new-branch-name>  # Deletes the branch remotely
