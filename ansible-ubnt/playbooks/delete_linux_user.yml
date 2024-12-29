@@ -3,9 +3,8 @@
   hosts: all
   become: true
   vars:
-    #user_to_delete: "{{ ansible_env.USER_TO_DELETE }}"
-    user_to_delete: "cyberark.tmuthie"
-
+    user_to_delete: "{{ ansible_env.USER_TO_DELETE }}"
+    # user_to_delete: "cyber.user" --> find out how to parse env in semaphore
   tasks:
     - name: Fail if the USER_TO_DELETE environment variable is not set
       fail:
