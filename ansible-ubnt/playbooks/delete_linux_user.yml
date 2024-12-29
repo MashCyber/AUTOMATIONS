@@ -2,6 +2,8 @@
 - name: Ensure specified user is deleted if it exists
   hosts: all
   become: true
+  vars: user_to_delete: "{{ ansible_env.USER_TO_DELETE  }}"
+  
   tasks:
     - name: Get the username from the environment variable
       ansible.builtin.set_fact:
