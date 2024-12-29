@@ -5,7 +5,7 @@
   tasks:
     - name: Get the username from the environment variable
       ansible.builtin.set_fact:
-        user_to_delete: "{{ ansible_env.USER_TO_DELETE }}"
+        user_to_delete: "{{ userdel.USER_TO_DELETE }}"
 
     - name: Fail if the USER_TO_DELETE environment variable is not set
       fail:
