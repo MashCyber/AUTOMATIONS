@@ -2,13 +2,14 @@
 - name: Ensure specified user is deleted if it exists
   hosts: all
   become: true
-  vars: user_to_delete: "{{ ansible_env.USER_TO_DELETE }}"
-  
+  vars:
+    user_to_delete: "{{ ansible_env.USER_TO_DELETE }}"
+
   tasks:
     - name: Fail if the USER_TO_DELETE environment variable is not set
       fail:
-        msg: "The environment variable USER_TO_DELETE is not set."
-      when: user_to_delete is not defined
+        msg: "The environment variable USER_TO_DELETE is not set or empty."
+      when: user_to_delete is not defined or user_to_delete == ""
 
     - name: Check if user "{{ user_to_delete }}" exists
       command: id -u {{ user_to_delete }}
