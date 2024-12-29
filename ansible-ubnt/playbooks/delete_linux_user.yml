@@ -5,10 +5,6 @@
   vars: user_to_delete: "{{ ansible_env.USER_TO_DELETE  }}"
   
   tasks:
-    - name: Get the username from the environment variable
-      ansible.builtin.set_fact:
-        user_to_delete: "{{ ansible_env.USER_TO_DELETE }}"
-
     - name: Fail if the USER_TO_DELETE environment variable is not set
       fail:
         msg: "The environment variable USER_TO_DELETE is not set."
